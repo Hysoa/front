@@ -1,0 +1,58 @@
+.logo {
+  z-index: 10;
+  position: relative;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+}
+
+.perso-1 {
+  right: 310px;
+  z-index: 1;
+  top: 0;
+}
+
+.perso-2 {
+  left: 135px;
+  top: 0;
+}
+
+.perso-3 {
+  left: 300px;
+  z-index: 11;
+  top: 10px;
+}
+
+.perso-4 {
+  left: 300px;
+  top: 0;
+}
+
+.perso-5 {
+  left: 500px;
+  top: 0;
+}
+
+.perso-6 {
+  top: 40px;
+  left: 0;
+  z-index: 11;
+}
+
+.perso-7 {
+  top: 0;
+  left: 0;
+}
+
+.img-perso {
+  opacity: 0;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+  animation: fade-in 1s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

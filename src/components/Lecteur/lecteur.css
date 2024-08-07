@@ -1,0 +1,10 @@
+.player {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.player button {
+  width: 40px;
+  heigth: 40px;
+}

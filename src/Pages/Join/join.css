@@ -1,0 +1,35 @@
+.Join section {
+  position: relative;
+}
+
+.Join .bg-join {
+  width: 60%;
+  margin: 0 auto;
+  animation: fadeIn 2s;
+}
+
+article.main-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 5px;
+  height: 70%;
+}
+
+article.main-container h2 {
+  font-size: 2.5rem;
+}
+
+article.main-container h3 {
+  font-size: 1.5rem;
+}
+
+article.main-container a,
+.bottom-logo {
+  transition: 1s;
+  width: 15%;
+}
+article.main-container a:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+}

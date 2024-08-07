@@ -1,0 +1,16 @@
+.ring {
+  position: fixed;
+  background-image: url("./../../assets/images/cursor/HOOK.png");
+  background-size: contain;
+  cursor: none;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  z-index: 999;
+  pointer-events: none;
+  --tw-ring-offset-shadow: none !important;
+  --tw-ring-shadow: none !important;
+  box-shadow: none !important;
+}

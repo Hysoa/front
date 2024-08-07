@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.contain {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.background {
+
+}
+
+
+.cup {
+  position: absolute;
+  top: 33%;
+  left: 9.2%;
+  width: 14%;
+  opacity: 1;
+}
+

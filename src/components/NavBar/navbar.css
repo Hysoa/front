@@ -1,0 +1,19 @@
+.active:nth-child(odd) {
+  transform: rotate(10deg) translateY(-50px);
+  transition: transform 1s;
+}
+
+.active:nth-child(even) {
+  transform: rotate(-10deg) translateY(-50px);
+  transition: transform 1s;
+}
+
+.nav-bar a:nth-child(odd):hover {
+  transform: rotate(10deg) translateY(-50px);
+  transition: transform 1s;
+}
+
+.nav-bar a:nth-child(even):hover {
+  transform: rotate(-10deg) translateY(-50px);
+  transition: transform 1s;
+}
