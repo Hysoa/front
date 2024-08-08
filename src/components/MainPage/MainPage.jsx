@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
 import "./main-page.css";
+import { motion } from "framer-motion";
 
 import cupConcert from "./../../assets/images/cup/cupConcert.png";
 import cupJoin from "./../../assets/images/cup/cupJoin.png";
@@ -13,7 +13,13 @@ import backgroundImg from "../../assets/images/background/JOUR DEFFINITIF.jpg";
 
 export default function MainPage() {
   return (
-    <div className="image-wrapper">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ type: "spring", stiffness: 50 }}
+      className="image-wrapper"
+    >
       <div className="image-container">
         <img
           src={backgroundImg}
@@ -44,6 +50,6 @@ export default function MainPage() {
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
