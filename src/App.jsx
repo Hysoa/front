@@ -13,7 +13,7 @@ import Concert from "./Pages/Concert/Concert";
 import Shop from "./Pages/Shop/Shop";
 import Cursor from "./components/Cursor/Cursor";
 import Navbar from "./components/NavBar/Navbar";
-import Test from "./Pages/Test/Test";
+import Clip from "./Pages/Clip/Clip";
 import Header from "./components/Header/Header";
 import Lecteur from "./components/Lecteur/Lecteur";
 import Join from "./Pages/Join/Join";
@@ -33,8 +33,8 @@ const App = () => {
           <Route path="/concert" element={<Concert />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/join" element={<Join />} />
-          {/*<Route path="/test" element={<Test />} />
-          <Route path="*" element={<NotFound />} />{" "} */}
+          <Route path="/clip" element={<Clip />} />
+          <Route path="*" element={<NotFound />} />{" "}
         </Routes>
       </AnimatePresence>
       {location.pathname === "/" ? <></> : <Navbar />}

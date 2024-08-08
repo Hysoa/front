@@ -21,22 +21,12 @@ export default function Lecteur() {
     setIsPlaying(!isPlaying);
   };
 
-  const stopPlayback = () => {
-    const audio = audioRef.current;
-    audio.pause();
-    audio.currentTime = 0;
-    setIsPlaying(false);
-  };
-
   return (
     <div className="player">
       <audio ref={audioRef} src={son} loop />
       <div className="controls">
         <button onClick={togglePlayPause}>
-          <img src={play} alt="" />
-        </button>
-        <button onClick={stopPlayback}>
-          <img src={pause} alt="" />
+          <img src={!isPlaying ? play : pause} alt="" />
         </button>
       </div>
     </div>

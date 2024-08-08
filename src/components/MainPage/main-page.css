@@ -1,45 +1,74 @@
 .image-wrapper {
-  overflow: auto;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: scroll;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
 }
 
 /* Style par défaut pour l'image */
-.image-container background {
+.image-container .background-image {
+  overflow-x: scroll;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   object-position: center;
 }
 
-/* Pour les très petits écrans (mobiles) */
-@media (max-width: 480px) {
-  .image-container background {
-    height: auto; /* Maintenir les proportions d'origine */
-    object-fit: contain; /* S'assurer que l'image entière est visible */
-  }
+.cup-container {
+  position: absolute;
+  width: 100%;
+  height: auto;
 }
 
-/* Pour les petits écrans (tablettes en portrait) */
-@media (min-width: 481px) and (max-width: 768px) {
-  .image-container background {
-    height: 100%;
-    object-fit: cover; /* Toujours couvrir, mais ajuster pour la taille de l'écran */
-    object-position: top; /* Afficher le haut de l'image, par exemple */
-  }
+.cup-concert {
+  transform: translate(76%, -110%);
+  width: 13%;
 }
 
-/* Pour les écrans moyens (tablettes en paysage, petits laptops) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .image-container background {
-    object-position: center; /* Centrer l'image comme dans le style de base */
-  }
+.cup-join {
+  transform: translate(576%, 139%);
+  width: 13%;
 }
 
-/* Pour les grands écrans (laptops, desktops) */
-@media (min-width: 1025px) {
-  .image-container background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Comme dans le style de base */
-    object-position: center; /* Centrer */
-  }
+.cup-livre {
+  transform: translate(322%, -220%);
+  width: 13%;
+}
+
+.cup-clip {
+  transform: translate(250%, -281%);
+  width: 13%;
+}
+
+.cup-shop {
+  transform: translate(594%, -78%);
+  width: 13%;
+}
+
+.cup-about-l {
+  transform: translate(274%, 79%);
+
+  width: 13%;
+}
+
+.cup-about-r {
+  transform: translate(382%, 78%);
+
+  width: 13%;
+}
+
+.cup {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 1s;
+}
+.cup:hover {
+  opacity: 1;
 }
