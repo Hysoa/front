@@ -12,6 +12,11 @@
   width: 100vw;
   position: relative;
 }
+.cup-container {
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
 
 /* Style par défaut pour l'image */
 .image-container .background-image {
@@ -19,12 +24,6 @@
   width: 100%;
   height: auto;
   object-position: center;
-}
-
-.cup-container {
-  position: absolute;
-  width: 100%;
-  height: auto;
 }
 
 .cup-concert {
