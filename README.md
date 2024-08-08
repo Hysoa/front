@@ -28,22 +28,21 @@ Ce projet a pour but de créer un site internet moderne et responsive pour Hysoa
 Pour installer et exécuter ce projet localement, suivez ces étapes :
 
 1. Clonez le dépôt :
-    ```bash
-    git clone https://github.com/votre-utilisateur/hysoa.git
-    ```
+   ```bash
+   git clone git@github.com:HugoLaurent/hysoa-main.git
+   ```
 2. Accédez au répertoire du projet :
-    ```bash
-    cd hysoa
-    ```
+   ```bash
+   cd hysoa
+   ```
 3. Installez les dépendances :
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 4. Démarrez l'application :
-    ```bash
-    npm run dev
-    ```
-
+   ```bash
+   npm run dev
+   ```
 
 ## Fonctionnalités
 
@@ -62,7 +61,6 @@ Les contributions sont les bienvenues ! Pour contribuer :
 3. Commitez vos modifications (`git commit -m 'Ajout d'une nouvelle fonctionnalité'`).
 4. Poussez votre branche (`git push origin feature/nouvelle-fonctionnalité`).
 5. Ouvrez une Pull Request.
-
 
 ## Licence
 
