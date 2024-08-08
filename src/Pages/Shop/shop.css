@@ -10,8 +10,13 @@
   width: 20%;
   top: 30%;
   border-radius: 10px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+  transition: 1s;
 }
 
+.album__img:hover {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+}
 .album__img:nth-child(odd) {
   left: 25%;
 }
