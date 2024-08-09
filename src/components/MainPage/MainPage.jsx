@@ -42,7 +42,7 @@ export default function MainPage({
     >
       <div className="image-container">
         {!isDay && (
-          <img src={nuit} alt="background" className="background-image night" />
+          <img src={nuit} alt="background" className="background-image" />
         )}
         {isDay && (
           <img src={jour} alt="background" className="background-image" />
