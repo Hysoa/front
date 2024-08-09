@@ -19,10 +19,16 @@ import cupBio from "./../../assets/images/cup/cupBio.png";
 import jour from "../../assets/images/background/jour.webp";
 import nuit from "../../assets/images/background/nuit.webp";
 
-export default function MainPage({ togglePlayPause, isPlaying }) {
-  const [isDay, setIsDay] = useState(true);
-
+export default function MainPage({
+  togglePlayPause,
+  isPlaying,
+  isDay,
+  setIsDay,
+}) {
   const toggleDayNight = () => {
+    if (isPlaying) {
+      togglePlayPause();
+    }
     setIsDay(!isDay);
   };
 

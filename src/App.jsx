@@ -16,12 +16,14 @@ import Navbar from "./components/NavBar/Navbar";
 import Clip from "./Pages/Clip/Clip";
 import Header from "./components/Header/Header";
 import Join from "./Pages/Join/Join";
-import son from "./assets/son/ZIK BOUCLE JOUR.mp3";
+import sonDay from "./assets/son/ZIK BOUCLE JOUR.mp3";
+import sonNight from "./assets/son/ZIK NUIT.mp3";
 import Lecteur from "./components/Lecteur/Lecteur"; // Importer le composant Lecteur
 
 const App = () => {
   const location = useLocation();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isDay, setIsDay] = useState(true);
   const audioRef = useRef(null);
 
   const togglePlayPause = () => {
@@ -47,6 +49,8 @@ const App = () => {
               <MainPage
                 isPlaying={isPlaying}
                 togglePlayPause={togglePlayPause}
+                isDay={isDay}
+                setIsDay={setIsDay}
               />
             }
           />
@@ -66,7 +70,7 @@ const App = () => {
         isPlaying={isPlaying}
         togglePlayPause={togglePlayPause}
         audioRef={audioRef}
-        son={son}
+        son={isDay ? sonDay : sonNight}
       />
     </div>
   );
