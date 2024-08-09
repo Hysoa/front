@@ -1,8 +1,12 @@
 import "./main-page.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-import Lecteur from "./../Lecteur/Lecteur";
+import play from "./../../assets/images/lecteur/BOUTON LECTURE.png";
+import pause from "./../../assets/images/lecteur/BOUTON PAUSE.png";
+import switchOn from "./../../assets/images/buttons/BOUTON NUIT ON.webp";
+import switchOff from "./../../assets/images/buttons/BOUTON NUIT OFF.webp";
 
 import cupConcert from "./../../assets/images/cup/cupConcert.png";
 import cupJoin from "./../../assets/images/cup/cupJoin.png";
@@ -15,7 +19,13 @@ import cupBio from "./../../assets/images/cup/cupBio.png";
 import jour from "../../assets/images/background/jour.webp";
 import nuit from "../../assets/images/background/nuit.webp";
 
-export default function MainPage() {
+export default function MainPage({ togglePlayPause, isPlaying }) {
+  const [isDay, setIsDay] = useState(true);
+
+  const toggleDayNight = () => {
+    setIsDay(!isDay);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -25,10 +35,24 @@ export default function MainPage() {
       className="image-wrapper"
     >
       <div className="image-container">
-        <img src={nuit} alt="background" className="background-image night" />
-        <img src={jour} alt="background" className="background-image" />
+        {!isDay && (
+          <img src={nuit} alt="background" className="background-image night" />
+        )}
+        {isDay && (
+          <img src={jour} alt="background" className="background-image" />
+        )}
         <div className="cup-container">
-          <Lecteur />
+          <section className="button-container">
+            <button className="main-page-play-button" onClick={togglePlayPause}>
+              <img src={!isPlaying ? play : pause} alt="" />
+            </button>
+            <button
+              className="main-page-switch-button"
+              onClick={toggleDayNight}
+            >
+              <img src={isDay ? switchOff : switchOn} alt="" />
+            </button>
+          </section>
           <Link to="/concert">
             <img src={cupConcert} alt="cup" className="cup cup-concert" />
           </Link>

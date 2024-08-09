@@ -25,6 +25,50 @@
   height: auto;
   object-position: center;
   position: absolute;
+  animation: fadeInBg 1s ease-in-out; /* Animation en opacité */
+  animation-fill-mode: forwards;
+  transition: opacity 1s ease-in-out; /* Transition en opacité */
+}
+
+@keyframes fadeInBg {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutBg {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.main-page-play-button img {
+  width: 100%;
+}
+
+.main-page-switch-button img {
+  width: 100%;
+}
+
+.button-container {
+  position: absolute;
+  width: 100%;
+  transform: translate(0%, -675%);
+  left: 36%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.button-container button {
+  width: 4%;
 }
 
 .night {
