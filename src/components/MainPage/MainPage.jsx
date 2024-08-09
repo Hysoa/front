@@ -1,5 +1,8 @@
 import "./main-page.css";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+import Lecteur from "./../Lecteur/Lecteur";
 
 import cupConcert from "./../../assets/images/cup/cupConcert.png";
 import cupJoin from "./../../assets/images/cup/cupJoin.png";
@@ -9,7 +12,8 @@ import cupShop from "./../../assets/images/cup/cupShop.png";
 import cupBioL from "./../../assets/images/cup/cupBioL.png";
 import cupBio from "./../../assets/images/cup/cupBio.png";
 
-import backgroundImg from "../../assets/images/background/JOUR DEFFINITIF.jpg";
+import jour from "../../assets/images/background/jour.webp";
+import nuit from "../../assets/images/background/nuit.webp";
 
 export default function MainPage() {
   return (
@@ -21,33 +25,31 @@ export default function MainPage() {
       className="image-wrapper"
     >
       <div className="image-container">
-        <img
-          src={backgroundImg}
-          alt="background"
-          className="background-image"
-        />
+        <img src={nuit} alt="background" className="background-image night" />
+        <img src={jour} alt="background" className="background-image" />
         <div className="cup-container">
-          <a href="/concert">
+          <Lecteur />
+          <Link to="/concert">
             <img src={cupConcert} alt="cup" className="cup cup-concert" />
-          </a>
-          <a href="/join">
+          </Link>
+          <Link to="/join">
             <img src={cupJoin} alt="cup" className="cup cup-join" />
-          </a>
-          <a href="/livre">
+          </Link>
+          <Link to="/livre">
             <img src={cupLivre} alt="cup" className="cup cup-livre" />
-          </a>
-          <a href="/clip">
+          </Link>
+          <Link to="/clip">
             <img src={cupClips} alt="cup" className="cup cup-clip" />
-          </a>
-          <a href="/shop">
+          </Link>
+          <Link to="/shop">
             <img src={cupShop} alt="cup" className="cup cup-shop" />
-          </a>
-          <a href="/about">
+          </Link>
+          <Link to="/about">
             <img src={cupBioL} alt="cup" className="cup cup-about-l" />
-          </a>
-          <a href="/about">
+          </Link>
+          <Link to="/about">
             <img src={cupBio} alt="cup" className="cup cup-about-r" />
-          </a>
+          </Link>
         </div>
       </div>
     </motion.div>

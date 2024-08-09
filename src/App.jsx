@@ -5,7 +5,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Home from "./components/Home/Home";
 import MainPage from "./components/MainPage/MainPage";
 import About from "./Pages/About/About";
 import Livre from "./Pages/Livre/Livre";
@@ -15,7 +14,6 @@ import Cursor from "./components/Cursor/Cursor";
 import Navbar from "./components/NavBar/Navbar";
 import Clip from "./Pages/Clip/Clip";
 import Header from "./components/Header/Header";
-import Lecteur from "./components/Lecteur/Lecteur";
 import Join from "./Pages/Join/Join";
 
 const App = () => {
@@ -24,7 +22,7 @@ const App = () => {
   return (
     <div className="flex flex-col h-[100vh] justify-between items-center">
       {location.pathname === "/" ? <></> : <Header />}
-      <Lecteur />
+
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<MainPage />} />

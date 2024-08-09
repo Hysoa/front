@@ -24,43 +24,46 @@
   width: 100%;
   height: auto;
   object-position: center;
+  position: absolute;
+}
+
+.night {
+  transform: translate(-1px, 4px);
 }
 
 .cup-concert {
-  transform: translate(76%, -110%);
-  width: 13%;
+  transform: translate(145%, -111%);
+  width: 11%;
 }
 
 .cup-join {
-  transform: translate(576%, 139%);
-  width: 13%;
+  transform: translate(645%, 139%);
+  width: 11%;
 }
 
 .cup-livre {
-  transform: translate(322%, -220%);
-  width: 13%;
+  transform: translate(392%, -221%);
+  width: 11%;
 }
 
 .cup-clip {
-  transform: translate(250%, -281%);
-  width: 13%;
+  transform: translate(319%, -282%);
+  width: 11%;
 }
 
 .cup-shop {
-  transform: translate(594%, -78%);
-  width: 13%;
+  transform: translate(665%, -77%);
+  width: 11%;
 }
 
 .cup-about-l {
-  transform: translate(274%, 79%);
-
-  width: 13%;
+  transform: translate(343%, 80%);
+  width: 11%;
 }
 
 .cup-about-r {
-  transform: translate(382%, 78%);
-
-  width: 13%;
+  transform: translate(452%, 78%);
+  width: 11%;
 }
 
 .cup {
