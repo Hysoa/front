@@ -1,0 +1,18 @@
+.Error {
+  background-color: black;
+}
+
+.Error img {
+  width: 40%;
+  margin: 0 auto;
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

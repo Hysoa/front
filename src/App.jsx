@@ -19,6 +19,7 @@ import Join from "./Pages/Join/Join";
 import sonDay from "./assets/son/ZIK BOUCLE JOUR.mp3";
 import sonNight from "./assets/son/ZIK NUIT.mp3";
 import Lecteur from "./components/Lecteur/Lecteur"; // Importer le composant Lecteur
+import Error from "./Pages/Error/Error";
 
 const App = () => {
   const location = useLocation();
@@ -77,11 +78,7 @@ const App = () => {
 };
 
 const NotFound = () => {
-  return (
-    <div>
-      <h2>404 - Not Found</h2>
-    </div>
-  );
+  return <Error />;
 };
 
 const AppWrapper = () => {
