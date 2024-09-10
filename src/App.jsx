@@ -20,6 +20,7 @@ import sonDay from "./assets/son/ZIK BOUCLE JOUR.mp3";
 import sonNight from "./assets/son/ZIK NUIT.mp3";
 import Lecteur from "./components/Lecteur/Lecteur"; // Importer le composant Lecteur
 import Error from "./Pages/Error/Error";
+import Home from "./Pages/Home/Home";
 
 const App = () => {
   const location = useLocation();
@@ -40,12 +41,17 @@ const App = () => {
 
   return (
     <div className="flex flex-col h-[100vh] justify-between items-center">
-      {location.pathname === "/" ? <></> : <Header />}
+      {location.pathname === "/home" || location.pathname === "/" ? (
+        <></>
+      ) : (
+        <Header />
+      )}
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <MainPage
                 isPlaying={isPlaying}
@@ -65,7 +71,11 @@ const App = () => {
         </Routes>
       </AnimatePresence>
 
-      {location.pathname === "/" ? <></> : <Navbar />}
+      {location.pathname === "/home" || location.pathname === "/" ? (
+        <></>
+      ) : (
+        <Navbar />
+      )}
       <Cursor />
       <Lecteur
         isPlaying={isPlaying}

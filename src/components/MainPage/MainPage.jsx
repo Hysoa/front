@@ -7,6 +7,7 @@ import play from "./../../assets/images/lecteur/BOUTON LECTURE.png";
 import pause from "./../../assets/images/lecteur/BOUTON PAUSE.png";
 import switchOn from "./../../assets/images/buttons/BOUTON NUIT ON.webp";
 import switchOff from "./../../assets/images/buttons/BOUTON NUIT OFF.webp";
+import burger from "./../../assets/images/buttons/buttonmenu.webp";
 
 import cupConcert from "./../../assets/images/cup/cupConcert.png";
 import cupJoin from "./../../assets/images/cup/cupJoin.png";
@@ -18,6 +19,7 @@ import cupBio from "./../../assets/images/cup/cupBio.png";
 
 import jour from "../../assets/images/background/jour.webp";
 import nuit from "../../assets/images/background/nuit.webp";
+import Modal from "../Modal/Modal";
 
 export default function MainPage({
   togglePlayPause,
@@ -25,11 +27,17 @@ export default function MainPage({
   isDay,
   setIsDay,
 }) {
+  const [modalOn, setModalOn] = useState(false);
+
   const toggleDayNight = () => {
     if (isPlaying) {
       togglePlayPause();
     }
     setIsDay(!isDay);
+  };
+
+  const handleModal = () => {
+    setModalOn(!modalOn);
   };
 
   return (
@@ -38,7 +46,7 @@ export default function MainPage({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ type: "spring", stiffness: 50 }}
-      className="image-wrapper"
+      className="image-wrapper relative"
     >
       <div className="image-container">
         {!isDay && (
@@ -57,6 +65,9 @@ export default function MainPage({
               onClick={toggleDayNight}
             >
               <img src={!isDay ? switchOff : switchOn} alt="" />
+            </button>
+            <button onClick={handleModal} className="main-page-nav-button">
+              <img src={burger} alt="" />
             </button>
           </section>
           <Link to="/concert">
@@ -82,6 +93,7 @@ export default function MainPage({
           </Link>
         </div>
       </div>
+      <Modal modalOn={modalOn} setModalOn={setModalOn} />
     </motion.div>
   );
 }

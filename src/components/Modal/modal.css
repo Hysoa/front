@@ -1,0 +1,8 @@
+.nav-bar-lateral {
+  transform: translateX(150%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.active {
+  transform: translateX(0);
+}
