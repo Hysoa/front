@@ -56,7 +56,7 @@ export default function MainPage({
               className="main-page-switch-button"
               onClick={toggleDayNight}
             >
-              <img src={isDay ? switchOff : switchOn} alt="" />
+              <img src={!isDay ? switchOff : switchOn} alt="" />
             </button>
           </section>
           <Link to="/concert">
