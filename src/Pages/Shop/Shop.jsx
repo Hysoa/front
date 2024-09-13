@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./shop.css";
 
@@ -11,6 +11,8 @@ import fleche from "./../../assets/images/buttons/fleche.png";
 
 export default function Shop() {
   const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const [cover, setCover] = useState(null);
+  const [linkToListen, setLinkToListen] = useState(null);
 
   const handleAlbumClick = (album) => {
     setSelectedAlbum(album);
@@ -19,6 +21,21 @@ export default function Shop() {
   const handleReturn = () => {
     setSelectedAlbum(null);
   };
+
+  useEffect(() => {
+    switch (selectedAlbum) {
+      case "sleepwel":
+        setCover(detailSleep);
+        setLinkToListen("https://youtu.be/3PL75Iz0oR8?si=gtvTG0bsw7AyxQzN")
+        break;
+      case "itcould":
+        setCover(detailIt);
+        setLinkToListen("https://youtu.be/0fuO1YpuT4M?si=CI-pAle5dAtwelsp")
+        break;
+      default:
+        setCover(null);
+    }
+  }, [selectedAlbum])
 
   return (
     <motion.div
@@ -32,15 +49,15 @@ export default function Shop() {
         <section className="relative">
           <img className="bg-album" src={bg} />
           <img
-            src={sleepwel}
-            onClick={() => handleAlbumClick("sleepwel")}
-            alt="Sleepwell Album"
-            className="album__img"
-          />
-          <img
             src={itcould}
             onClick={() => handleAlbumClick("itcould")}
             alt="It Could Album"
+            className="album__img"
+          />
+          <img
+            src={sleepwel}
+            onClick={() => handleAlbumClick("sleepwel")}
+            alt="Sleepwell Album"
             className="album__img"
           />
         </section>
@@ -48,38 +65,26 @@ export default function Shop() {
 
       {selectedAlbum && (
         <section className="album__details-container">
-          {selectedAlbum === "sleepwel" && (
-            <section className="album__details">
+          
+            <section className="album__details relative">
               <img
                 className="detail-img"
-                src={detailSleep}
+                src={cover}
                 alt="Sleepwell Details"
               />
               <div className="album__navigation">
                 <img onClick={handleReturn} src={fleche} alt="Arrow" />
-                <div>
-                  <p>Ecouter</p>
-                  <p>Acheter</p>
+                <div className="absolute left-[-3vw] top-[32vw] w-36 text-2xl">
+                  <p
+                    onClick={() => window.open(linkToListen, "_blank")}
+                    className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                  >
+                    Ecouter
+                  </p>
+                  <p className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]">Acheter</p>
                 </div>
               </div>
             </section>
-          )}
-          {selectedAlbum === "itcould" && (
-            <section className="album__details">
-              <img
-                className="detail-img"
-                src={detailIt}
-                alt="It Could Details"
-              />
-              <div className="album__navigation">
-                <img onClick={handleReturn} src={fleche} alt="Arrow" />
-                <div>
-                  <p>Ecouter</p>
-                  <p>Acheter</p>
-                </div>
-              </div>
-            </section>
-          )}
         </section>
       )}
     </motion.div>
