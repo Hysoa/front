@@ -117,7 +117,7 @@ export default function Join() {
           {isFormContactDisplayed && (
             <div
               ref={formRef}
-              className="absolute w-[100%] h-[100%] px-20"
+              className="absolute w-[100%] h-[100%] px-14"
               style={{
                 backgroundImage: `url(${contact})`,
                 backgroundSize: "contain",
@@ -129,13 +129,14 @@ export default function Join() {
                 className={cn(
                   "relative flex flex-col",
                   "pl-[5vw] pt-[4.8vw]",
-                  "4xl:pt-[5.8vh]"
+                  "2xl:pt-[4.9vw] 2xl:pl-[6.4vw]",
+                  "4xl:pt-[5.8vh] 4xl:pl-[4.8vw]"
                 )}
               >
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   className={cn(
-                    "flex flex-col text-3xl 4xl:text-4xl text-black",
+                    "flex flex-col text-xl 2xl:text-3xl 4xl:text-4xl text-black",
                     "w-11/12",
                     "4xl:w-5/6"
                   )}
@@ -153,7 +154,7 @@ export default function Join() {
                       "w-4/6 bg-transparent placeholder-black/50 focus:outline-none",
                       "focus:border-transparent focus:ring-0",
                       "ml-[4.3vw] h-[1.5vw]",
-                      "4xl:ml-[4.5vw] 4xl:h-[1.7vh]"
+                      "4xl:ml-[2.8vw] 4xl:h-[1.7vh]"
                     )}
                   />
                   <input
@@ -173,8 +174,9 @@ export default function Join() {
                     })}
                     className={cn(
                       "bg-transparent placeholder-black/50 focus:outline-none",
-                      "mt-[0.5vw] ml-[4.3vw] h-[3.6vh] w-4/6",
-                      "4xl:mt-4 4xl:ml-[4.5vw] 4xl:h-[1.7vh]"
+                      "mt-[0.5vw] ml-[4.3vw] h-[1.5vw] w-4/6",
+                      "2xl:mt-[.4vw] 2xl:ml-[4.3vw]",
+                      "4xl:mt-[0.3vw] 4xl:ml-[2.8vw] 4xl:h-[1.7vh]"
                     )}
                   />
                   <input
@@ -187,8 +189,9 @@ export default function Join() {
                     {...register("subject", { required: true, maxLength: 58 })}
                     className={cn(
                       "bg-transparent placeholder-black/50 focus:outline-none",
-                      "mt-[2vw] ml-[4vw]",
-                      "4xl:mt-[2.8vh] 4xl:ml-[4.5vw]"
+                      "mt-[2.5vw] ml-[4vw] h-[1.5vw]",
+                      "2xl:mt-[2.5vw] 2xl:ml-[4.1vw]",
+                      "4xl:mt-[2.6vh] 4xl:ml-[2.7vw]"
                     )}
                   />
                   <textarea
@@ -202,10 +205,11 @@ export default function Join() {
                     className={cn(
                       "bg-transparent placeholder-black/50 focus:outline-none",
                       "mt-[2vw] ml-[5.4vw] h-[8vw] min-h-[8vw] max-h-[8vw]",
-                      "4xl:mt-[2vw] 4xl:ml-[5.3vw] 4xl:h-[10vh] 4xl:max-h-[10vh]"
+                      "2xl:mt-[2.2vw] 2xl:ml-[5.6vw] 2xl:h-[9.3vh]",
+                      "4xl:mt-[1.4vw] 4xl:ml-[3.5vw] 4xl:min-h-[5vw] 4xl:max-h-[5vw]"
                     )}
                   />
-                  <div className="flex justify-between mt-3">
+                  <div className="flex justify-between mt-2 2xl:mt-[.5vw] 4xl:mt-[0.8vw]">
                     {messageSent ? (
                       <button type="submit" className="self-end text-green-900">
                         Message envoyé !

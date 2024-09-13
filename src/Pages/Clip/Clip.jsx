@@ -1,8 +1,8 @@
 import "./clip.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
-import bg from "./../../assets/images/menu/FOND VIDE.png";
+import bg from "../../assets/images/menu/FOND VIDE.png";
 
 const clips = [
   {
@@ -65,34 +65,38 @@ export default function Clip() {
       transition={{ type: "spring", stiffness: 50 }}
       className="Shop"
     >
-      <section className="relative">
-        <img className="bg-album" src={bg} alt="Background" />
-        <div className="clip-container">
-          <div className="buttons">
-            {clips.map((clip, index) => (
-              <button
-                onClick={() => handleChoice(clip, index)}
-                key={index}
-                className={index === activeIndex ? "active" : ""}
-              >
-                {clip.title}
-              </button>
-            ))}
-          </div>
-          <section className="flex flex-col items-center">
-            <div className={`iframe-container ${fadeClass}`}>
-              <iframe
-                width="560"
-                height="315"
-                src={selectedClip}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </section>
+      <section
+        className="relative h-[40vw] w-[70vw]"
+        style={{
+          backgroundImage: `url('${bg}')`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="buttons flex flex-wrap gap-y-5 2xl:gap-5 pt-[7vw] px-[10vw] text-4xl 4xl:text-6xl">
+          {clips.map((clip, index) => (
+            <button
+              onClick={() => handleChoice(clip, index)}
+              key={index}
+              className={index === activeIndex ? "active" : ""}
+            >
+              {clip.title}
+            </button>
+          ))}
         </div>
+        <section className="flex flex-col items-center mt-[1vw] 3xl:mt-[5vw]">
+          <div className={`iframe-container ${fadeClass}`}>
+            <iframe
+              src={selectedClip}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="w-[32vw] h-[18vw]"
+            ></iframe>
+          </div>
+        </section>
       </section>
     </motion.div>
   );
