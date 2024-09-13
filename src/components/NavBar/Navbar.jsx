@@ -10,7 +10,7 @@ import join from "./../../assets/images/etiquettes/join.png";
 import clip from "./../../assets/images/etiquettes/clips.png";
 
 const links = [
-  { to: "/", label: "Home", image: accueil },
+  { to: "/home", label: "Home", image: accueil },
   { to: "/about", label: "About", image: bio },
   { to: "/livre", label: "Livre", image: livre },
   { to: "/concert", label: "Concert", image: concert },
