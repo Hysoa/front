@@ -4,7 +4,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { useState, createContext } from "react";
+import { useState, createContext, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import MainPage from "./components/MainPage/MainPage";
 import About from "./Pages/About/About";
@@ -27,6 +27,8 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDay, setIsDay] = useState(true);
 
+  const mainRef = useRef(null);
+
   return (
     <AppContext.Provider
       value={{
@@ -34,9 +36,13 @@ const App = () => {
         setIsPlaying,
         isDay,
         setIsDay,
+        mainRef,
       }}
     >
-      <div className="flex flex-col h-[100vh] justify-between items-center">
+      <div
+        ref={mainRef}
+        className="flex flex-col h-[100vh] justify-between items-center"
+      >
         {location.pathname === "/home" || location.pathname === "/" ? (
           <></>
         ) : (

@@ -4,8 +4,6 @@ import bg from "./../../assets/images/menu/BOOKS.png";
 
 import { motion } from "framer-motion";
 
-console.log(bg);
-
 export default function Livre() {
   return (
     <motion.div

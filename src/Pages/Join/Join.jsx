@@ -28,7 +28,7 @@ export default function Join() {
   } = useForm();
 
   const onSubmit = (data) => {
-    fetch("http://localhost:3000/api/v1/contact", {
+    fetch(`${import.meta.env.VITE_API_URL}/contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
