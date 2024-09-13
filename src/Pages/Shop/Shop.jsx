@@ -9,6 +9,11 @@ import detailSleep from "./../../assets/images/album/details/sleepwell.png";
 import detailIt from "./../../assets/images/album/details/itcould.png";
 import fleche from "./../../assets/images/buttons/fleche.png";
 
+const albums = {
+  sleepwell: "Sleep Well",
+  itcould: "It Could Be Worse",
+};
+
 export default function Shop() {
   const [selectedAlbum, setSelectedAlbum] = useState(null);
   const [cover, setCover] = useState(null);
@@ -24,18 +29,50 @@ export default function Shop() {
 
   useEffect(() => {
     switch (selectedAlbum) {
-      case "sleepwel":
+      case "sleepwell":
         setCover(detailSleep);
-        setLinkToListen("https://youtu.be/3PL75Iz0oR8?si=gtvTG0bsw7AyxQzN")
+        setLinkToListen("https://youtu.be/3PL75Iz0oR8?si=gtvTG0bsw7AyxQzN");
         break;
       case "itcould":
         setCover(detailIt);
-        setLinkToListen("https://youtu.be/0fuO1YpuT4M?si=CI-pAle5dAtwelsp")
+        setLinkToListen("https://youtu.be/0fuO1YpuT4M?si=CI-pAle5dAtwelsp");
         break;
       default:
         setCover(null);
     }
-  }, [selectedAlbum])
+  }, [selectedAlbum]);
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      const sessionId = query.get("session_id");
+      fetch(`${import.meta.env.VITE_API_URL}/checkout/getSharedLink/${sessionId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then(({ sharedLink }) => {
+          const encodedURL = encodeURI(sharedLink);
+          const handleDownload = () => {
+            window.location.href = encodedURL;
+          };
+          handleDownload();
+          setTimeout(() => {
+            window.location.href = "/shop";
+          }, 1000)
+        });
+    }
+
+    if (query.get("canceled")) {
+      alert(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, [selectedAlbum]);
 
   return (
     <motion.div
@@ -56,7 +93,7 @@ export default function Shop() {
           />
           <img
             src={sleepwel}
-            onClick={() => handleAlbumClick("sleepwel")}
+            onClick={() => handleAlbumClick("sleepwell")}
             alt="Sleepwell Album"
             className="album__img"
           />
@@ -65,26 +102,32 @@ export default function Shop() {
 
       {selectedAlbum && (
         <section className="album__details-container">
-          
-            <section className="album__details relative">
-              <img
-                className="detail-img"
-                src={cover}
-                alt="Sleepwell Details"
-              />
-              <div className="album__navigation">
-                <img onClick={handleReturn} src={fleche} alt="Arrow" />
-                <div className="absolute left-[-3vw] top-[32vw] w-36 text-2xl">
-                  <p
-                    onClick={() => window.open(linkToListen, "_blank")}
-                    className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
-                  >
-                    Ecouter
-                  </p>
-                  <p className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]">Acheter</p>
-                </div>
-              </div>
-            </section>
+          <section className="album__details relative">
+            <img className="detail-img" src={cover} alt="Sleepwell Details" />
+            <div className="album__navigation">
+              <img onClick={handleReturn} src={fleche} alt="Arrow" />
+              <form
+                action={`${
+                  import.meta.env.VITE_API_URL
+                }/checkout/createSession?album=${albums[selectedAlbum]}`}
+                method="POST"
+                className="absolute flex text-white left-[-3vw] top-[32vw] w-[7vw] px-3 py-2 text-2xl bg-black/50 justify-between rounded-xl"
+              >
+                <p
+                  onClick={() => window.open(linkToListen, "_blank")}
+                  className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                >
+                  Ecouter
+                </p>
+                <button
+                  type="submit"
+                  className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                >
+                  Acheter
+                </button>
+              </form>
+            </div>
+          </section>
         </section>
       )}
     </motion.div>
