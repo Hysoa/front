@@ -6,14 +6,11 @@
 
 .image-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   width: 100vw;
   position: relative;
 }
 .cup-container {
-  position: absolute;
   width: 100%;
   height: auto;
 }
@@ -62,14 +59,9 @@
 }
 
 .button-container {
-  position: absolute;
   width: 100%;
-  transform: translate(-3%, -652%);
-  left: 36%;
   display: flex;
-  justify-content: center;
-  flex-direction: row-reverse;
-  align-items: center;
+  flex-direction: column;
 }
 
 .button-container button {
@@ -80,45 +72,11 @@
   transform: translate(-1px, 4px);
 }
 
-.cup-concert {
-  transform: translate(145%, -111%);
-  width: 11%;
-}
-
-.cup-join {
-  transform: translate(645%, 139%);
-  width: 11%;
-}
-
-.cup-livre {
-  transform: translate(392%, -221%);
-  width: 11%;
-}
-
-.cup-clip {
-  transform: translate(319%, -282%);
-  width: 11%;
-}
-
-.cup-shop {
-  transform: translate(665%, -77%);
-  width: 11%;
-}
-
-.cup-about-l {
-  transform: translate(343%, 80%);
-  width: 11%;
-}
-
-.cup-about-r {
-  transform: translate(452%, 78%);
-  width: 11%;
-}
-
 .cup {
   opacity: 0;
   position: absolute;
   transition: opacity 1s;
+  width: 11%
 }
 .cup:hover {
   opacity: 1;
