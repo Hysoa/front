@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import cn from "classnames";
 import "./shop.css";
 
 import bg from "./../../assets/images/menu/FOND VIDE.png";
@@ -18,6 +19,8 @@ export default function Shop() {
   const [selectedAlbum, setSelectedAlbum] = useState(null);
   const [cover, setCover] = useState(null);
   const [linkToListen, setLinkToListen] = useState(null);
+  const [selectPurshase, setSelectPurshase] = useState(false);
+  const purshaseSelectRef = useRef(null);
 
   const handleAlbumClick = (album) => {
     setSelectedAlbum(album);
@@ -25,6 +28,33 @@ export default function Shop() {
 
   const handleReturn = () => {
     setSelectedAlbum(null);
+  };
+
+  const handleBuy = (purshaseType) => {
+    fetch(`${import.meta.env.VITE_API_URL}/checkout/createSession`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        album: albums[selectedAlbum],
+        purshaseType,
+      }),
+    })
+      .then((response) => response.json())
+      .then(({ url }) => {
+        window.location.href = url;
+      });
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      purshaseSelectRef.current &&
+      !purshaseSelectRef.current.contains(event.target) &&
+      event.target.id !== "purshase"
+    ) {
+      setSelectPurshase(false);
+    }
   };
 
   useEffect(() => {
@@ -43,17 +73,20 @@ export default function Shop() {
   }, [selectedAlbum]);
 
   useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
       const sessionId = query.get("session_id");
-      fetch(`${import.meta.env.VITE_API_URL}/checkout/getSharedLink/${sessionId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      fetch(
+        `${import.meta.env.VITE_API_URL}/checkout/getSharedLink/${sessionId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
         .then((response) => response.json())
         .then(({ sharedLink }) => {
           const encodedURL = encodeURI(sharedLink);
@@ -63,16 +96,21 @@ export default function Shop() {
           handleDownload();
           setTimeout(() => {
             window.location.href = "/shop";
-          }, 1000)
+          }, 1000);
         });
     }
-
-    if (query.get("canceled")) {
-      alert(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
   }, [selectedAlbum]);
+
+  useEffect(() => {
+    if (selectPurshase) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectPurshase]);
 
   return (
     <motion.div
@@ -111,20 +149,56 @@ export default function Shop() {
                   import.meta.env.VITE_API_URL
                 }/checkout/createSession?album=${albums[selectedAlbum]}`}
                 method="POST"
-                className="absolute flex text-white left-[-3vw] top-[32vw] w-[7vw] px-3 py-2 text-2xl bg-black/50 justify-between rounded-xl"
+                className="absolute flex text-white left-[-3vw] top-[32vw] px-3 py-2 text-2xl bg-black/50 justify-between rounded-xl"
               >
-                <p
+                <div
                   onClick={() => window.open(linkToListen, "_blank")}
                   className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
                 >
                   Ecouter
-                </p>
-                <button
-                  type="submit"
-                  className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
-                >
-                  Acheter
-                </button>
+                </div>
+                <div className="relative">
+                  <span
+                    id="purshase"
+                    onClick={() =>
+                      setSelectPurshase(!selectPurshase)
+                    }
+                    className={cn(
+                      "relative",
+                      "hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]",
+                      selectPurshase &&
+                        "drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                    )}
+                  >
+                    Acheter
+                  </span>
+
+                  {selectPurshase && (
+                    <ul
+                      ref={purshaseSelectRef}
+                      className="absolute bottom-[2.8em] left-[-0.2em] w-[9em] bg-black/50 p-3 rounded-xl"
+                    >
+                      <li
+                        className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                        onClick={() => handleBuy("digital")}
+                      >
+                        Version numérique
+                      </li>
+                      <li
+                        className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                        onClick={() => handleBuy("shipping-france")}
+                      >
+                        Livraison (France)
+                      </li>
+                      <li
+                        className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                        onClick={() => handleBuy("shipping-international")}
+                      >
+                        Livraison (International)
+                      </li>
+                    </ul>
+                  )}
+                </div>
               </form>
             </div>
           </section>
