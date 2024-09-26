@@ -150,14 +150,14 @@ export default function Shop() {
     >
       {!selectedAlbum && (
         <section className="relative">
+          <img className="bg-album" src={bg} />
           {purshaseValidationMessage && (
             <div
-              className="absolute top-[5em] left-[20em] w-[40em] text-white text-2xl text-center"
+              className="absolute top-[4em] left-[20em] w-[40em] text-white text-2xl text-center"
               dangerouslySetInnerHTML={{ __html: purshaseValidationMessage }}
             />
           )}
-          <img className="bg-album" src={bg} />
-          <div className="absolute flex justify-between top-[15em] left-[30em] w-[30em] gap-[1em]">
+          <div className="absolute flex justify-between top-[12em] left-[30em] w-[30em] gap-[1em]">
             <img
               src={sleepwel}
               onClick={() => handleAlbumClick("sleepwell")}
