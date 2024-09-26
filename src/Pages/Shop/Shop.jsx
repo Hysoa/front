@@ -10,17 +10,14 @@ import detailSleep from "./../../assets/images/album/details/sleepwell.png";
 import detailIt from "./../../assets/images/album/details/itcould.png";
 import fleche from "./../../assets/images/buttons/fleche.png";
 
-const albums = {
-  sleepwell: "Sleep Well",
-  itcould: "It Could Be Worse",
-};
-
 export default function Shop() {
   const [selectedAlbum, setSelectedAlbum] = useState(null);
   const [cover, setCover] = useState(null);
   const [linkToListen, setLinkToListen] = useState(null);
   const [selectPurshase, setSelectPurshase] = useState(false);
   const purshaseSelectRef = useRef(null);
+  const [purshaseValidationMessage, setPurshaseValidationMessage] = useState();
+  const [receivedLinks, setReceivedLinks] = useState(false);
 
   const handleAlbumClick = (album) => {
     setSelectedAlbum(album);
@@ -31,13 +28,14 @@ export default function Shop() {
   };
 
   const handleBuy = (purshaseType) => {
+    console.log("là");
     fetch(`${import.meta.env.VITE_API_URL}/checkout/createSession`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        album: albums[selectedAlbum],
+        album: selectedAlbum,
         purshaseType,
       }),
     })
@@ -73,33 +71,61 @@ export default function Shop() {
   }, [selectedAlbum]);
 
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
+    if (!receivedLinks) {
+      const query = new URLSearchParams(window.location.search);
+      if (query.get("success")) {
+        const sessionId = query.get("session_id");
+        fetch(
+          `${import.meta.env.VITE_API_URL}/checkout/getSharedLink/${sessionId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then(({ purshaseType, downloadAlbums }) => {
+            if (purshaseType !== "shipping") {
+              if (downloadAlbums) {
+                const encodedUri = downloadAlbums.map((album) =>
+                  encodeURI(album.link)
+                );
+                
+                setPurshaseValidationMessage(`
+                  Merci pour votre achat ! Le téléchargement va bientôt démarrer.<br />
+                  (Si le téléchargement ne démarre pas, téléchargez manuellement le contenu de votre achat:&nbsp;
+                  ${downloadAlbums.map(
+                    (album, index) =>
+                      `<a class="underline" href="${
+                        encodedUri[index]
+                      }" target="_blank">${album.name}</a>${
+                        index !== downloadAlbums.length - 1 ? ", " : ")"
+                      }`
+                  ).join("")}
+                `);
 
-    if (query.get("success")) {
-      const sessionId = query.get("session_id");
-      fetch(
-        `${import.meta.env.VITE_API_URL}/checkout/getSharedLink/${sessionId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((response) => response.json())
-        .then(({ sharedLink }) => {
-          const encodedURL = encodeURI(sharedLink);
-          const handleDownload = () => {
-            window.location.href = encodedURL;
-          };
-          handleDownload();
-          setTimeout(() => {
-            window.location.href = "/shop";
-          }, 1000);
-        });
+                encodedUri.forEach((link) => {
+                  window.open(link, "_blank");
+                });
+
+                setReceivedLinks(true);
+              } else {
+                setPurshaseValidationMessage(`
+                  Merci pour votre achat, mais une erreur est survenue lors de la récupération du lien de téléchargement...
+                  \nVeuillez contacter nous contacter et nous communiquer le numéro de commande suivant: ${sessionId}
+                `);
+              }
+            } else {
+              setPurshaseValidationMessage(`
+                Merci pour votre achat !<br />
+                Votre commande sera traitée dans les plus brefs délais!
+              `);
+            }
+          });
+      }
     }
-  }, [selectedAlbum]);
+  }, [purshaseValidationMessage, receivedLinks]);
 
   useEffect(() => {
     if (selectPurshase) {
@@ -122,17 +148,23 @@ export default function Shop() {
     >
       {!selectedAlbum && (
         <section className="relative">
+          {purshaseValidationMessage && (
+            <div
+              className="absolute top-[5em] left-[20em] w-[40em] text-white text-2xl text-center"
+              dangerouslySetInnerHTML={{ __html: purshaseValidationMessage }}
+            />
+          )}
           <img className="bg-album" src={bg} />
-          <img
-            src={itcould}
-            onClick={() => handleAlbumClick("itcould")}
-            alt="It Could Album"
-            className="album__img"
-          />
           <img
             src={sleepwel}
             onClick={() => handleAlbumClick("sleepwell")}
             alt="Sleepwell Album"
+            className="album__img"
+          />
+          <img
+            src={itcould}
+            onClick={() => handleAlbumClick("itcould")}
+            alt="It Could Album"
             className="album__img"
           />
         </section>
@@ -144,13 +176,7 @@ export default function Shop() {
             <img className="detail-img" src={cover} alt="Sleepwell Details" />
             <div className="album__navigation">
               <img onClick={handleReturn} src={fleche} alt="Arrow" />
-              <form
-                action={`${
-                  import.meta.env.VITE_API_URL
-                }/checkout/createSession?album=${albums[selectedAlbum]}`}
-                method="POST"
-                className="absolute flex text-white left-[-3vw] top-[32vw] px-3 py-2 text-2xl bg-black/50 justify-between rounded-xl"
-              >
+              <div className="absolute flex text-white left-[-3vw] top-[32vw] px-3 py-2 text-2xl bg-black/50 justify-between rounded-xl">
                 <div
                   onClick={() => window.open(linkToListen, "_blank")}
                   className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
@@ -160,9 +186,7 @@ export default function Shop() {
                 <div className="relative">
                   <span
                     id="purshase"
-                    onClick={() =>
-                      setSelectPurshase(!selectPurshase)
-                    }
+                    onClick={() => setSelectPurshase(!selectPurshase)}
                     className={cn(
                       "relative",
                       "hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]",
@@ -199,7 +223,7 @@ export default function Shop() {
                     </ul>
                   )}
                 </div>
-              </form>
+              </div>
             </div>
           </section>
         </section>

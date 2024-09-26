@@ -6,6 +6,10 @@ import bg from "../../assets/images/menu/FOND VIDE.png";
 
 const clips = [
   {
+    title: "DIRTY SHOCK",
+    url: "https://www.youtube.com/embed/hMlYhr_8pI0"
+  },
+  {
     title: "JUNE",
     url: "https://www.youtube.com/embed/xyko7vWflAs",
   },

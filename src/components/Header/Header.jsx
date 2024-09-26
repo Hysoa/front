@@ -33,11 +33,9 @@ export default function Header() {
     if (index !== undefined) {
       setSelectedPerso(index);
     } else {
-      setSelectedPerso(1); // default to first image if path is not found
+      setSelectedPerso(1);
     }
   }, [location]);
-
-  console.log(`perso-${selectedPerso}`);
 
   return (
     <header className="Header relative w-96">
