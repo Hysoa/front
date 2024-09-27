@@ -25,6 +25,8 @@ export default function Shop() {
 
   const handleReturn = () => {
     setSelectedAlbum(null);
+    setCover(null);
+    setLinkToListen(null);
   };
 
   const handleBuy = (purshaseType) => {
@@ -125,6 +127,11 @@ export default function Shop() {
               `);
             }
           });
+      } else if (query.get("album")) {
+        const album = query.get("album");
+        setSelectedAlbum(
+          ["sleepwell", "itcould"].includes(album) ? album : null
+        );
       }
     }
   }, [purshaseValidationMessage, receivedLinks]);
@@ -153,20 +160,22 @@ export default function Shop() {
           <img className="bg-album" src={bg} />
           {purshaseValidationMessage && (
             <div
-              className="absolute top-[4em] left-[20em] w-[40em] text-white text-2xl text-center"
+              className="absolute top-[6vw] left-[16vw] w-[70vw] text-white text-sm lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl text-center"
               dangerouslySetInnerHTML={{ __html: purshaseValidationMessage }}
             />
           )}
-          <div className="absolute flex justify-between top-[12em] left-[30em] w-[30em] gap-[1em]">
+          <div className="absolute flex justify-between top-[12vw] left-[28vw] w-[44vw] gap-[1em]">
             <img
               src={sleepwel}
               onClick={() => handleAlbumClick("sleepwell")}
               alt="Sleepwell Album"
+              className="h-[20vw] w-[20vw]"
             />
             <img
               src={itcould}
               onClick={() => handleAlbumClick("itcould")}
               alt="It Could Album"
+              className="h-[20vw] w-[20vw]"
             />
           </div>
         </section>
