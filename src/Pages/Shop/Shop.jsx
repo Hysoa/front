@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
 import "./shop.css";
@@ -57,6 +57,26 @@ export default function Shop() {
     }
   };
 
+  const handleDownload = useCallback((encodedUri, downloadAlbums) => {
+    setPurshaseValidationMessage(`
+      Merci pour votre achat ! Le téléchargement va bientôt démarrer.<br />
+      (Si le téléchargement ne démarre pas, téléchargez manuellement le contenu de votre achat:&nbsp;
+      ${downloadAlbums
+        .map(
+          (album, index) =>
+            `<a class="underline" href="${encodedUri[index]}" target="_blank">${
+              album.name
+            }</a>${index !== downloadAlbums.length - 1 ? ", " : ")"}`
+        )
+        .join("")}
+    `);
+
+    encodedUri.forEach((link) => {
+      window.open(link, "_blank");
+    });
+    setReceivedLinks(true);
+  }, []);
+
   useEffect(() => {
     switch (selectedAlbum) {
       case "sleepwell":
@@ -93,27 +113,7 @@ export default function Shop() {
                 const encodedUri = downloadAlbums.map((album) =>
                   encodeURI(album.link)
                 );
-
-                setPurshaseValidationMessage(`
-                  Merci pour votre achat ! Le téléchargement va bientôt démarrer.<br />
-                  (Si le téléchargement ne démarre pas, téléchargez manuellement le contenu de votre achat:&nbsp;
-                  ${downloadAlbums
-                    .map(
-                      (album, index) =>
-                        `<a class="underline" href="${
-                          encodedUri[index]
-                        }" target="_blank">${album.name}</a>${
-                          index !== downloadAlbums.length - 1 ? ", " : ")"
-                        }`
-                    )
-                    .join("")}
-                `);
-
-                encodedUri.forEach((link) => {
-                  window.open(link, "_blank");
-                });
-
-                setReceivedLinks(true);
+                handleDownload(encodedUri, downloadAlbums);
               } else {
                 setPurshaseValidationMessage(`
                   Merci pour votre achat, mais une erreur est survenue lors de la récupération du lien de téléchargement...
@@ -134,7 +134,7 @@ export default function Shop() {
         );
       }
     }
-  }, [purshaseValidationMessage, receivedLinks]);
+  }, [receivedLinks, handleDownload]);
 
   useEffect(() => {
     if (selectPurshase) {
