@@ -65,27 +65,33 @@ const App = () => {
         {location.pathname === "/home" || location.pathname === "/" ? (
           <></>
         ) : (
-          <Header />
+          !isPortrait && <Header />
         )}
 
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="/home" element={<MainPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/livre" element={<Livre />} />
-            <Route path="/concert" element={<Concert />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/join" element={<Join />} />
-            <Route path="/clip" element={<Clip />} />
-            <Route path="*" element={<NotFound />} />{" "}
+            {isPortrait ? (
+              <Route path="*" element={<MainPage />} />
+            ) : (
+              <>
+                <Route path="/home" element={<MainPage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/livre" element={<Livre />} />
+                <Route path="/concert" element={<Concert />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/join" element={<Join />} />
+                <Route path="/clip" element={<Clip />} />
+                <Route path="*" element={<NotFound />} />{" "}
+              </>
+            )}
           </Routes>
         </AnimatePresence>
 
         {location.pathname === "/home" || location.pathname === "/" ? (
           <></>
         ) : (
-          <Navbar />
+          !isPortrait && <Navbar />
         )}
         <Cursor />
         <Lecteur />
