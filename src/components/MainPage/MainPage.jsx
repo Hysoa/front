@@ -15,6 +15,7 @@ import cupClips from "./../../assets/images/cup/cupClips.png";
 import cupShop from "./../../assets/images/cup/cupShop.png";
 import cupBioL from "./../../assets/images/cup/cupBioL.png";
 import cupBio from "./../../assets/images/cup/cupBio.png";
+import landscape from "./../../assets/images/logo/landscape.png";
 
 import jour from "../../assets/images/background/jour.webp";
 import nuit from "../../assets/images/background/nuit.webp";
@@ -22,8 +23,8 @@ import nuit from "../../assets/images/background/nuit.webp";
 import { AppContext } from "../../App";
 
 export default function MainPage() {
-  const { isPlaying, setIsPlaying, isDay, setIsDay } = useContext(AppContext);
-
+  const { isPlaying, setIsPlaying, isDay, setIsDay, isPortrait } =
+    useContext(AppContext);
 
   return (
     <motion.div
@@ -33,51 +34,88 @@ export default function MainPage() {
       transition={{ type: "spring", stiffness: 50 }}
       className="image-wrapper relative"
     >
-      <div className="image-container">
-        {!isDay && (
-          <img src={nuit} alt="background" className="background-image" />
-        )}
-        {isDay && (
-          <img src={jour} alt="background" className="background-image" />
-        )}
-        <div className="flex relative w-full">
-          <section className="button-container p-5">
-            <button
-              className="main-page-play-button"
-              onClick={() => setIsPlaying(!isPlaying)}
-            >
-              <img src={!isPlaying ? play : pause} alt="" />
-            </button>
-            <button
-              className="main-page-switch-button"
-              onClick={() => setIsDay(!isDay)}
-            >
-              <img src={!isDay ? switchOff : switchOn} alt="" />
-            </button>
-          </section>
-          <Link to="/concert">
-            <img src={cupConcert} alt="cup" className="cup top-[18.2vw] left-[15.9vw]" />
-          </Link>
-          <Link to="/join">
-            <img src={cupJoin} alt="cup" className="cup top-[40.6vw] left-[71.1vw]" />
-          </Link>
-          <Link to="/livre">
-            <img src={cupLivre} alt="cup" className="cup top-[8.3vw] left-[43.1vw]" />
-          </Link>
-          <Link to="/clip">
-            <img src={cupClips} alt="cup" className="cup top-[2.7vw] left-[35.1vw]" />
-          </Link>
-          <Link to="/shop">
-            <img src={cupShop} alt="cup" className="cup top-[21.2vw] left-[73.1vw]" />
-          </Link>
-          <Link to="/about">
-            <img src={cupBioL} alt="cup" className="cup top-[35.3vw] left-[37.8vw]" />
-          </Link>
-          <Link to="/about">
-            <img src={cupBio} alt="cup" className="cup top-[35.1vw] left-[49.73vw]" />
-          </Link>
+      {isPortrait ? (
+        <div className="h-screen flex flex-col justify-center">
+          <img src={landscape} alt="landscape" />
+          <p className="text-white text-2xl text-center mt-5">
+            Veuillez tourner votre appareil
+          </p>
         </div>
-      </div>
+      ) : (
+        <div className="image-container">
+          {!isDay && (
+            <img src={nuit} alt="background" className="background-image" />
+          )}
+          {isDay && (
+            <img src={jour} alt="background" className="background-image" />
+          )}
+          <div className="flex relative w-full">
+            <section className="button-container p-5">
+              <button
+                className="main-page-play-button"
+                onClick={() => setIsPlaying(!isPlaying)}
+              >
+                <img src={!isPlaying ? play : pause} alt="" />
+              </button>
+              <button
+                className="main-page-switch-button"
+                onClick={() => setIsDay(!isDay)}
+              >
+                <img src={!isDay ? switchOff : switchOn} alt="" />
+              </button>
+            </section>
+            <Link to="/concert">
+              <img
+                src={cupConcert}
+                alt="cup"
+                className="cup top-[18.2vw] left-[15.9vw]"
+              />
+            </Link>
+            <Link to="/join">
+              <img
+                src={cupJoin}
+                alt="cup"
+                className="cup top-[40.6vw] left-[71.1vw]"
+              />
+            </Link>
+            <Link to="/livre">
+              <img
+                src={cupLivre}
+                alt="cup"
+                className="cup top-[8.3vw] left-[43.1vw]"
+              />
+            </Link>
+            <Link to="/clip">
+              <img
+                src={cupClips}
+                alt="cup"
+                className="cup top-[2.7vw] left-[35.1vw]"
+              />
+            </Link>
+            <Link to="/shop">
+              <img
+                src={cupShop}
+                alt="cup"
+                className="cup top-[21.2vw] left-[73.1vw]"
+              />
+            </Link>
+            <Link to="/about">
+              <img
+                src={cupBioL}
+                alt="cup"
+                className="cup top-[35.3vw] left-[37.8vw]"
+              />
+            </Link>
+            <Link to="/about">
+              <img
+                src={cupBio}
+                alt="cup"
+                className="cup top-[35.1vw] left-[49.73vw]"
+              />
+            </Link>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }

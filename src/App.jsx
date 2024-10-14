@@ -4,7 +4,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { useState, createContext, useRef } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import MainPage from "./components/MainPage/MainPage";
 import About from "./Pages/About/About";
@@ -29,6 +29,24 @@ const App = () => {
 
   const mainRef = useRef(null);
 
+  const [isPortrait, setIsPortrait] = useState(
+    window.matchMedia("(orientation: portrait)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(orientation: portrait)");
+
+    // Définir si on est en mode portrait ou non
+    const handleOrientationChange = () => {
+      setIsPortrait(mediaQuery.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleOrientationChange);
+
+    return () =>
+      mediaQuery.removeEventListener("change", handleOrientationChange);
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -37,6 +55,7 @@ const App = () => {
         isDay,
         setIsDay,
         mainRef,
+        isPortrait,
       }}
     >
       <div

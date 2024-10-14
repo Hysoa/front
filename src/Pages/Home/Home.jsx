@@ -10,10 +10,10 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-hidden relative h-screen flex justify-center">
+    <div className="overflow-hidden relative h-screen flex flex-col justify-center items-center">
       <img
         onClick={handleClick}
-        className="transition-transform duration-500 transform hover:scale-110"
+        className="transition-transform duration-500 transform hover:scale-110 sm:h-96 lg:h-full"
         src={homeImage}
         alt=""
       />

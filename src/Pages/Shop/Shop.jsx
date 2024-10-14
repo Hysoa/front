@@ -30,7 +30,6 @@ export default function Shop() {
   };
 
   const handleBuy = (purshaseType) => {
-    console.log("là");
     fetch(`${import.meta.env.VITE_API_URL}/checkout/createSession`, {
       method: "POST",
       headers: {
