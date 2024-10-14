@@ -186,14 +186,14 @@ export default function Shop() {
             <img className="detail-img" src={cover} alt="Sleepwell Details" />
             <div className="album__navigation">
               <img onClick={handleReturn} src={fleche} alt="Arrow" />
-              <div className="absolute flex text-white left-[-3vw] top-[32vw] px-3 py-2 text-2xl bg-black/50 justify-between rounded-xl">
+              <div className="absolute flex text-white left-[-3vw] top-[32vw] !p-1 lg:!p-3 text-sm lg:text-xl bg-black/50 justify-between">
                 <div
                   onClick={() => window.open(linkToListen, "_blank")}
-                  className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                  className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] !py-1 lg:!py-2"
                 >
                   Ecouter
                 </div>
-                <div className="relative">
+                <div className="relative !p-1 lg:!p-2">
                   <span
                     id="purshase"
                     onClick={() => setSelectPurshase(!selectPurshase)}
