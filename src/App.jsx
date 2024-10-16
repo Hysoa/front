@@ -37,7 +37,6 @@ const App = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(orientation: portrait)");
 
-    // Définir si on est en mode portrait ou non
     const handleOrientationChange = () => {
       setIsPortrait(mediaQuery.matches);
     };
@@ -47,6 +46,7 @@ const App = () => {
     return () =>
       mediaQuery.removeEventListener("change", handleOrientationChange);
   }, []);
+
 
   return (
     <AppContext.Provider

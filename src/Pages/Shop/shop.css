@@ -62,14 +62,13 @@
 }
 
 .album__navigation {
-  top: 0;
   position: absolute;
   align-items: center;
   gap: 10px;
   display: flex;
   justify-content: space-between;
-  width: 30%;
-  left: 50%;
+  width: 50%;
+  left: 45%;
   transform: translateX(-50%);
 }
 

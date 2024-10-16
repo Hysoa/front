@@ -25,6 +25,7 @@ export default function Join() {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -46,6 +47,7 @@ export default function Join() {
   const handleClickOutside = (event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
       setIsFormContactDisplayed(false);
+      reset();
     }
   };
 
@@ -117,7 +119,7 @@ export default function Join() {
           {isFormContactDisplayed && (
             <div
               ref={formRef}
-              className="absolute w-[100%] h-[100%] px-14"
+              className="absolute w-[100%] h-[100%] px-14 text-sm"
               style={{
                 backgroundImage: `url(${contact})`,
                 backgroundSize: "contain",
@@ -136,7 +138,7 @@ export default function Join() {
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   className={cn(
-                    "flex flex-col text-xl 2xl:text-3xl 4xl:text-4xl text-black",
+                    "flex flex-col text-md 2xl:text-3xl 4xl:text-4xl text-black",
                     "w-11/12",
                     "4xl:w-5/6"
                   )}
@@ -209,7 +211,7 @@ export default function Join() {
                       "4xl:mt-[1.4vw] 4xl:ml-[3.5vw] 4xl:min-h-[5vw] 4xl:max-h-[5vw]"
                     )}
                   />
-                  <div className="flex justify-between mt-2 2xl:mt-[.5vw] 4xl:mt-[0.8vw]">
+                  <div className="flex justify-between mt-2 text-xs xl:text-2xl 2xl:mt-[.5vw] 4xl:mt-[0.8vw]">
                     {messageSent ? (
                       <button type="submit" className="self-end text-green-900">
                         Message envoyé !

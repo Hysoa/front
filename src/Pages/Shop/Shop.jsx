@@ -156,25 +156,25 @@ export default function Shop() {
     >
       {!selectedAlbum && (
         <section className="relative">
-          <img className="bg-album" src={bg} />
+          <img className="mx-auto w-[60%]" src={bg} />
           {purshaseValidationMessage && (
             <div
               className="absolute top-[6vw] left-[16vw] w-[70vw] text-white text-sm lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl text-center"
               dangerouslySetInnerHTML={{ __html: purshaseValidationMessage }}
             />
           )}
-          <div className="absolute flex justify-between top-[12vw] left-[28vw] w-[44vw] gap-[1em]">
+          <div className="absolute flex justify-between top-[12vw] left-[28vw] 4xl:top-[6vw] 4xl:left-[17.5vw] w-[44vw] 4xl:w-[20vw] gap-[1em]">
             <img
               src={sleepwel}
               onClick={() => handleAlbumClick("sleepwell")}
               alt="Sleepwell Album"
-              className="h-[20vw] w-[20vw]"
+              className="h-[20vw] w-[20vw] 4xl:w-[16vw] 4xl:h-[16vw] hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
             />
             <img
               src={itcould}
               onClick={() => handleAlbumClick("itcould")}
               alt="It Could Album"
-              className="h-[20vw] w-[20vw]"
+              className="h-[20vw] w-[20vw] 4xl:w-[16vw] 4xl:h-[16vw] hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
             />
           </div>
         </section>
@@ -183,10 +183,10 @@ export default function Shop() {
       {selectedAlbum && (
         <section className="album__details-container">
           <section className="album__details relative">
-            <img className="detail-img" src={cover} alt="Sleepwell Details" />
-            <div className="album__navigation">
-              <img onClick={handleReturn} src={fleche} alt="Arrow" />
-              <div className="absolute flex text-white left-[-3vw] top-[32vw] !p-1 lg:!p-3 text-sm lg:text-xl bg-black/50 justify-between">
+            <img className="w-[70vw] xl:w-[50vw]" src={cover} alt="Sleepwell Details" />
+            <div className="album__navigation top-0">
+              <img onClick={handleReturn} src={fleche} alt="Arrow" className="absolute top-0 left-[-8vw] xl:top-[-1vw]" />
+              <div className="absolute flex text-white left-[-6vw] xl:left-[-4vw] top-[41vw] xl:top-[29vw] !p-1 2xl:!p-3 4xl:!p-7 text-lg lg:text-xl 2xl:text-3xl 4xl:text-6xl bg-zinc-900/20 xl:bg-black/50 justify-between">
                 <div
                   onClick={() => window.open(linkToListen, "_blank")}
                   className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] !py-1 lg:!py-2"
@@ -210,7 +210,7 @@ export default function Shop() {
                   {selectPurshase && (
                     <ul
                       ref={purshaseSelectRef}
-                      className="absolute bottom-[2.8em] left-[-0.2em] w-[9em] bg-black/50 p-3 rounded-xl"
+                      className="absolute bottom-[2.8em] left-[-0.2em] w-[9em] bg-black/50 p-3 4xl:p-6 rounded-xl"
                     >
                       <li
                         className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
