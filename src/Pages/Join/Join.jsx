@@ -75,16 +75,16 @@ export default function Join() {
           <h2 className="text-white">JOIN US</h2>
           <div className="logo-top-container flex justify-between">
             <a target="_blank" href="https://www.instagram.com/HysoaMusic">
-              <img src={instagram} alt="" />
+              <img src={instagram} alt="" className="w-[20vh] xl:w-full" />
             </a>
             <a target="_blank" href="https://www.facebook.com/HysoaMusic">
-              <img src={facebook} alt="" />
+              <img src={facebook} alt="" className="w-[20vh] xl:w-full" />
             </a>
             <a target="_blank" href="https://www.youtube.com/@hysoamusic">
-              <img src={youtube} alt="" />
+              <img src={youtube} alt="" className="w-[20vh] xl:w-full" />
             </a>
             <a target="_blank" href="https://www.tiktok.com/@hysoahysoa">
-              <img src={tiktok} alt="" />
+              <img src={tiktok} alt="" className="w-[20vh] xl:w-full" />
             </a>
           </div>
           <div className="logo-bottom-container flex justify-around">
@@ -92,19 +92,19 @@ export default function Join() {
               target="_blank"
               href=" https://www.deezer.com/fr/artist/12057132"
             >
-              <img src={deezer} alt="" />
+              <img src={deezer} alt="" className="w-[20vh] xl:w-full" />
             </a>
             <a
               target="_blank"
               href="https://open.spotify.com/intl-fr/album/415IcfQrWr6mbQk5lIaEQm"
             >
-              <img src={spotify} alt="" />
+              <img src={spotify} alt="" className="w-[20vh] xl:w-full" />
             </a>
             <a
               target="_blank"
               href="http://itunes.apple.com/album/id1738668120?ls=1&app=itunes"
             >
-              <img src={apple} alt="" />
+              <img src={apple} alt="" className="w-[20vh] xl:w-full" />
             </a>
           </div>
           <h2 className="text-white">Nous Contacter :</h2>

@@ -60,7 +60,7 @@ export default function Clip() {
           backgroundPosition: "center",
         }}
       >
-        <div className="buttons flex flex-wrap gap-y-5 2xl:gap-5 pt-[7vw] px-[10vw] text-4xl 4xl:text-6xl">
+        <div className="buttons flex flex-wrap gap-y-3 2xl:gap-5 pt-[7vw] px-[10vw] text-xl xl:text-4xl">
           {clips
             .sort((a, b) => a.order > b.order)
             .map((clip, index) => (

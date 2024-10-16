@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import homeImage from "../../assets/images/logo/LOGO HYSOA DEFINITIF.png";
 
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
 export default function Home() {
   const navigate = useNavigate();
   const [isHeld, setIsHeld] = useState(false);
@@ -13,6 +17,7 @@ export default function Home() {
     if (isHeld) {
       timer = setTimeout(() => {
         navigate("/admin");
+        isMobileDevice && document.documentElement.requestFullscreen();
       }, 5000); // 7000 ms = 7 secondes
     } else {
       clearTimeout(timer); // Annule le timer si on relâche le clic avant les 7 secondes
@@ -30,6 +35,7 @@ export default function Home() {
     setIsHeld(false);
     const timeHeld = Date.now() - holdTime;
     if (timeHeld < 7000) {
+      isMobileDevice() && document.documentElement.requestFullscreen();
       navigate("/home");
     }
   };
