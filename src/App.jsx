@@ -19,6 +19,7 @@ import Join from "./Pages/Join/Join";
 import Lecteur from "./components/Lecteur/Lecteur"; // Importer le composant Lecteur
 import Error from "./Pages/Error/Error";
 import Home from "./Pages/Home/Home";
+import Admin from "./Pages/Admin/Admin";
 
 export const AppContext = createContext();
 
@@ -82,6 +83,7 @@ const App = () => {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/clip" element={<Clip />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />{" "}
               </>
             )}

@@ -1,57 +1,30 @@
 import "./clip.css";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import http from "../../utils/http";
 
 import bg from "../../assets/images/menu/FOND VIDE.png";
 
-const clips = [
-  {
-    title: "DIRTY SHOCK",
-    url: "https://www.youtube.com/embed/hMlYhr_8pI0"
-  },
-  {
-    title: "JUNE",
-    url: "https://www.youtube.com/embed/xyko7vWflAs",
-  },
-  {
-    title: "BLUELIGHT",
-    url: "https://www.youtube.com/embed/RymOqLXujtw",
-  },
-  {
-    title: "SLEEP WELL",
-    url: "https://www.youtube.com/embed/LBUcByh-G7s",
-  },
-  {
-    title: "DUST",
-    url: "https://www.youtube.com/embed/z5Zy5D0lF7g",
-  },
-  {
-    title: "COLDSHOWER",
-    url: "https://www.youtube.com/embed/V6so-hlqJvg",
-  },
-  {
-    title: "FIVE YEARS LATER",
-    url: "https://www.youtube.com/embed/iKlk0fjMvrU",
-  },
-  {
-    title: "PINKY SWEAR",
-    url: "https://www.youtube.com/embed/6ifm9uUAAyc",
-  },
-  {
-    title: "DREAMCATCHER",
-    url: "https://www.youtube.com/embed/4cR2H3Eu-44",
-  },
-];
-
 export default function Clip() {
-  const [selectedClip, setSelectedClip] = useState(clips[0].url);
-  const [selectedTitle, setSelectedTitle] = useState(clips[0].title);
+  const [clips, setClips] = useState([]);
+  const [selectedClip, setSelectedClip] = useState();
   const [activeIndex, setActiveIndex] = useState(0); // Ajouté pour gérer l'état actif
   const [fadeClass, setFadeClass] = useState("fade-in"); // Ajouté pour gérer l'animation
 
+  const getAllClips = useCallback(
+    async () =>
+      http()
+        .get("/clip/getAll")
+        .then((response) => response.status === 200 && response.data)
+        .then(({ clips }) => {
+          setClips(clips);
+        })
+        .catch((error) => console.error(error)),
+    [setClips]
+  );
+
   const handleChoice = (clip, index) => {
     setSelectedClip(clip.url);
-    setSelectedTitle(clip.title);
     setActiveIndex(index); // Définir l'index actif
     setFadeClass(""); // Réinitialiser l'animation
 
@@ -60,6 +33,15 @@ export default function Clip() {
       setFadeClass("fade-in");
     }, 10);
   };
+
+  useEffect(() => {
+    if (clips.length === 0) {
+      getAllClips();
+    } else {
+      console.log(clips[0]);
+      setSelectedClip(clips[0].url);
+    }
+  }, [clips, getAllClips]);
 
   return (
     <motion.div
@@ -79,15 +61,19 @@ export default function Clip() {
         }}
       >
         <div className="buttons flex flex-wrap gap-y-5 2xl:gap-5 pt-[7vw] px-[10vw] text-4xl 4xl:text-6xl">
-          {clips.map((clip, index) => (
-            <button
-              onClick={() => handleChoice(clip, index)}
-              key={index}
-              className={index === activeIndex ? "active" : ""}
-            >
-              {clip.title}
-            </button>
-          ))}
+          {clips
+            .sort((a, b) => a.order > b.order)
+            .map((clip, index) => (
+              <button
+                onClick={() => handleChoice(clip, index)}
+                key={index}
+                className={index === activeIndex ? "active" : ""}
+              >
+                {clip.title}
+              </button>
+            ))}
+
+          
         </div>
         <section className="flex flex-col items-center mt-[1vw] 3xl:mt-[5vw]">
           <div className={`iframe-container ${fadeClass}`}>
