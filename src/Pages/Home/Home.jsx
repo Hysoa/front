@@ -17,25 +17,29 @@ export default function Home() {
     if (isHeld) {
       timer = setTimeout(() => {
         navigate("/admin");
-        isMobileDevice && document.documentElement.requestFullscreen();
-      }, 5000); // 7000 ms = 7 secondes
+        if (isMobileDevice()) {
+          document.documentElement.requestFullscreen?.();
+        }
+      }, 7000);
     } else {
-      clearTimeout(timer); // Annule le timer si on relâche le clic avant les 7 secondes
+      clearTimeout(timer);
     }
 
-    return () => clearTimeout(timer); // Nettoyage si le composant est démonté ou si l'état change
-  }, [isHeld]);
+    return () => clearTimeout(timer);
+  }, [isHeld, navigate]);
 
-  const handleMouseDown = () => {
+  const handleInteractionStart = () => {
     setIsHeld(true);
     setHoldTime(Date.now());
   };
 
-  const handleMouseUp = () => {
+  const handleInteractionEnd = () => {
     setIsHeld(false);
     const timeHeld = Date.now() - holdTime;
     if (timeHeld < 7000) {
-      isMobileDevice() && document.documentElement.requestFullscreen();
+      if (isMobileDevice()) {
+        document.documentElement.requestFullscreen?.();
+      }
       navigate("/home");
     }
   };
@@ -43,12 +47,14 @@ export default function Home() {
   return (
     <div className="overflow-hidden relative h-screen flex flex-col justify-center items-center">
       <img
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        onMouseDown={handleInteractionStart}
+        onMouseUp={handleInteractionEnd}
+        onMouseLeave={handleInteractionEnd}
+        onTouchStart={handleInteractionStart}
+        onTouchEnd={handleInteractionEnd}
         className="transition-transform duration-500 transform hover:scale-110 sm:h-96 lg:h-full"
         src={homeImage}
-        alt=""
+        alt="Home Logo"
       />
     </div>
   );
