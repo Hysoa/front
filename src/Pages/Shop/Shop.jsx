@@ -76,6 +76,7 @@ export default function Shop() {
     setReceivedLinks(true);
   }, []);
 
+
   useEffect(() => {
     switch (selectedAlbum) {
       case "sleepwell":
@@ -84,7 +85,7 @@ export default function Shop() {
         break;
       case "itcould":
         setCover(detailIt);
-        setLinkToListen("https://youtu.be/0fuO1YpuT4M?si=CI-pAle5dAtwelsp");
+        setLinkToListen("https://youtu.be/5LBdYEu1KhA?si=EPPtMLrEZTTGnuk8");
         break;
       default:
         setCover(null);
@@ -212,12 +213,6 @@ export default function Shop() {
                       ref={purshaseSelectRef}
                       className="absolute bottom-[2.8em] left-[-0.2em] w-[9em] bg-black/50 p-3 4xl:p-6 rounded-xl"
                     >
-                      <li
-                        className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
-                        onClick={() => handleBuy("digital")}
-                      >
-                        Version numérique
-                      </li>
                       <li
                         className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
                         onClick={() => handleBuy("shipping-france")}
