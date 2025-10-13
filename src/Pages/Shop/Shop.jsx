@@ -32,7 +32,7 @@ export default function Shop() {
   };
 
   const handleBuy = (purshaseType) => {
-    fetch(`${import.meta.env.VITE_API_URL}/checkout/createSession`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/checkout/createSession`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -214,42 +214,40 @@ export default function Shop() {
                 >
                   Ecouter
                 </div>
-                {selectedAlbum !== "itwill" && (
-                  <div className="relative !p-1 lg:!p-2">
-                    <span
-                      id="purshase"
-                      onClick={() => setSelectPurshase(!selectPurshase)}
-                      className={cn(
-                        "relative",
-                        "hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]",
-                        selectPurshase &&
-                          "drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
-                      )}
-                    >
-                      Acheter
-                    </span>
-
-                    {selectPurshase && (
-                      <ul
-                        ref={purshaseSelectRef}
-                        className="absolute bottom-[2.8em] left-[-0.2em] w-[9em] bg-black/50 p-3 4xl:p-6 rounded-xl"
-                      >
-                        <li
-                          className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
-                          onClick={() => handleBuy("shipping-france")}
-                        >
-                          Livraison (France)
-                        </li>
-                        <li
-                          className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
-                          onClick={() => handleBuy("shipping-international")}
-                        >
-                          Livraison (International)
-                        </li>
-                      </ul>
+                <div className="relative !p-1 lg:!p-2">
+                  <span
+                    id="purshase"
+                    onClick={() => setSelectPurshase(!selectPurshase)}
+                    className={cn(
+                      "relative",
+                      "hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]",
+                      selectPurshase &&
+                        "drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
                     )}
-                  </div>
-                )}
+                  >
+                    Acheter
+                  </span>
+
+                  {selectPurshase && (
+                    <ul
+                      ref={purshaseSelectRef}
+                      className="absolute bottom-[2.8em] left-[-0.2em] w-[9em] bg-black/50 p-3 4xl:p-6 rounded-xl"
+                    >
+                      <li
+                        className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                        onClick={() => handleBuy("shipping-france")}
+                      >
+                        Livraison (France)
+                      </li>
+                      <li
+                        className="hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                        onClick={() => handleBuy("shipping-international")}
+                      >
+                        Livraison (International)
+                      </li>
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
           </section>
