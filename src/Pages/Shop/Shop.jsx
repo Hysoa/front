@@ -169,7 +169,7 @@ export default function Shop() {
               dangerouslySetInnerHTML={{ __html: purshaseValidationMessage }}
             />
           )}
-          <div className="absolute flex flex-wrap justify-center top-[14vw] left-[25vw] 4xl:top-[6vw] 4xl:left-[17.5vw] w-[51vw] 4xl:w-[20vw] gap-[1em]">
+          <div className="absolute flex flex-wrap justify-center top-[14vw] left-[25vw] 4xl:top-[6vw] 4xl:left-[17.5vw] w-[51vw] 4xl:w-[20vw] gap-[.2em] md:gap-[.5em] xl:gap-[1em]">
             <img
               src={sleepwel}
               onClick={() => handleAlbumClick("sleepwell")}
