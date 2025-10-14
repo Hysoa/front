@@ -14,7 +14,7 @@ export default function Clip() {
   const getAllClips = useCallback(
     async () =>
       http()
-        .get("/clip/getAll")
+        .get("clip/getAll")
         .then((response) => response.status === 200 && response.data)
         .then(({ clips }) => {
           setClips(clips);

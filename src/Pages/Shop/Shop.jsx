@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
+import http from "../../utils/http";
 import "./shop.css";
 
 import bg from "./../../assets/images/menu/FOND VIDE.png";
@@ -32,18 +33,13 @@ export default function Shop() {
   };
 
   const handleBuy = (purshaseType) => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/v1/checkout/createSession`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    http()
+      .post("checkout/createSession", {
         album: selectedAlbum,
         purshaseType,
-      }),
-    })
-      .then((response) => response.json())
-      .then(({ url }) => {
+      })
+      .then((response) => {
+        const { url } = response.data;
         window.location.href = url;
       });
   };

@@ -18,13 +18,12 @@ export default function Manager() {
 
   const fetchAllClips = async () => {
     try {
-      console.log("go fetch all clips");
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/clip/getAll`
-      );
-      const data = await response.json();
-      console.log(data.clips);
-      setClips(data.clips);
+      http()
+        .get("clip/getAll")
+        .then((reponse) => {
+          const { clips } = reponse.data;
+          setClips(clips);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -32,18 +31,18 @@ export default function Manager() {
 
   const handleDeleteClip = useCallback(async (id) => {
     try {
-      http()
-        .delete(`/clip/delete/${id}`)
+      http(userToken)
+        .delete(`clip/delete/${id}`)
         .then((response) => response.status === 200 && fetchAllClips());
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [userToken]);
 
   const handleAddClip = useCallback(async () => {
     try {
       http(userToken)
-        .post("/clip/add", {
+        .post("clip/add", {
           title: watchAddClipTitle,
           url: watchAddClipUrl,
           order: watchAddClipOrder,
@@ -62,10 +61,9 @@ export default function Manager() {
 
   const handleUpdateOrderClip = useCallback(
     async (id, order) => {
-      console.log("update clip", id, order);
       try {
         http(userToken)
-          .put(`/clip/update/${id}`, {
+          .put(`clip/update/${id}`, {
             order,
           })
           .then((response) => {

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import cn from "classnames";
+import http from "../../utils/http";
 import "./join.css";
 
 import bg from "./../../assets/images/menu/FOND VIDE.png";
@@ -29,19 +30,15 @@ export default function Join() {
   } = useForm();
 
   const onSubmit = (data) => {
-    fetch(`${import.meta.env.VITE_API_URL}/contact`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then(() => {
-      setMessageSent(true);
+    http()
+      .post("contact", data)
+      .then(() => {
+        setMessageSent(true);
 
-      setTimeout(() => {
-        setIsFormContactDisplayed(false);
-      }, 3000);
-    });
+        setTimeout(() => {
+          setIsFormContactDisplayed(false);
+        }, 3000);
+      });
   };
 
   const handleClickOutside = (event) => {
@@ -237,18 +234,18 @@ export default function Join() {
                             {errors.email &&
                               errors.email.type === "pattern" &&
                               "L'adresse mail est invalide"}
-                            {errors.name && errors.name.type === "required" && (
-                              "Le nom est requis"
-                            )}
-                            {errors.email && errors.email.type === "required" && (
-                              "L'email est requis"
-                            )}
-                            {errors.subject && errors.subject.type === "required" && (
-                              "L'objet est requis"
-                            )}
-                            {errors.message && errors.message.type === "required" && (
-                              "Le message est requis"
-                            )}
+                            {errors.name &&
+                              errors.name.type === "required" &&
+                              "Le nom est requis"}
+                            {errors.email &&
+                              errors.email.type === "required" &&
+                              "L'email est requis"}
+                            {errors.subject &&
+                              errors.subject.type === "required" &&
+                              "L'objet est requis"}
+                            {errors.message &&
+                              errors.message.type === "required" &&
+                              "Le message est requis"}
                           </>
                         )}
                       </p>

@@ -1,18 +1,14 @@
 import { useForm } from "react-hook-form";
+import http from "../../utils/http";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    fetch(`${import.meta.env.VITE_API_URL}/user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then(({ token }) => {
+    http()
+      .post("user/login", data)
+      .then((response) => {
+        const { token } = response.data
         if (token) {
           localStorage.setItem("token", token);
           window.location.reload();
